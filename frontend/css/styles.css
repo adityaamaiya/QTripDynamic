@@ -119,15 +119,30 @@ footer {
   cursor: pointer;
   -webkit-transition: 0.2s all;
   overflow: hidden;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 }
+.activity-card-text{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  margin: 0;
+}
+.activity-card-text:first-of-type{
+  padding-top: 5px;
+}
+.activity-card-text:last-of-type{
+  padding-top: 0;
+}
 .activity-card img {
   width: 100%;
   height: 100%;
+
   /* border-radius: 8px; */
   -webkit-transition: 0.2s all;
   /* -webkit-filter: brightness(70%); */
@@ -136,6 +151,8 @@ footer {
   -webkit-filter: brightness(50%);
   /* transform: scale(1.1); */
 }
+
+
 
 /* activity-detail page css */
 
@@ -182,9 +199,9 @@ footer {
   /* height: 50px; */
   padding: 5px 10px;
   box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.3);
-  /*
+  
   box-shadow: 0px 9.4px 20.4px rgba(0, 0, 0, 0.13),
-    0px 9.2px 20.6px rgba(0, 0, 0, 0.1); */
+    0px 9.2px 20.6px rgba(0, 0, 0, 0.1);
   min-width: 50%;
   color: #fff;
   background: rgb(255, 145, 0);
@@ -192,7 +209,7 @@ footer {
   right: 0;
   z-index: 1;
   margin-top: 16px;
-  margin-right: 8px;
+  margin-right: -18px;
   display: flex;
   justify-content: center;
   align-items: center;

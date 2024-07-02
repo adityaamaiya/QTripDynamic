@@ -1,8 +1,8 @@
 import config from "../conf/index.js";
-
+config.backendEndpoint= `${config.backendEndpoint}cities`;
 async function init() {
   //Fetches list of all cities along with their images and description
-
+  
   let cities = await fetchCities();
 
   //Updates the DOM with the cities
