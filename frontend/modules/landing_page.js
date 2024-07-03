@@ -1,8 +1,8 @@
 import config from "../conf/index.js";
-config.backendEndpoint = `${config.backendEndpoint}cities`;
+config.backendEndpoint= `${config.backendEndpoint}cities`;
 async function init() {
   //Fetches list of all cities along with their images and description
-
+  
   let cities = await fetchCities();
 
   //Updates the DOM with the cities
@@ -37,8 +37,8 @@ function addCityToDOM(id, city, description, image) {
   // 1. Populate the City details and insert those details into the DOM
 
   let row = document.getElementById("data");
-  let col = document.createElement("div");
-  col.className = "col-lg-3 col-sm-6 col-12 mb-4";
+  let col= document.createElement("div");
+  col.className= "col-lg-3 col-sm-6 col-12 mb-4";
   col.innerHTML = `
   <a href="pages/adventures/?city=${id}" id="${id}">
     <div class="tile" >
@@ -50,9 +50,9 @@ function addCityToDOM(id, city, description, image) {
      </div>
 </a>
 `;
-  row.appendChild(col);
+row.appendChild(col);
 
-
+  
 }
 
 export { init, fetchCities, addCityToDOM };
