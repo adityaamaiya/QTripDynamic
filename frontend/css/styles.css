@@ -219,12 +219,6 @@ footer {
   border-radius: 10px 0px 0px 10px;
   font-weight: bolder;
 }
-.hide{
-  display: none;
-}
-.show{
-  display: block;
-}
 
 .reserve-button {
   width: 100%;
