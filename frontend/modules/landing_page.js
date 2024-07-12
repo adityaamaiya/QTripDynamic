@@ -1,5 +1,5 @@
 import config from "../conf/index.js";
-config.backendEndpoint = `${config.backendEndpoint}cities`;
+
 async function init() {
   //Fetches list of all cities along with their images and description
 
@@ -17,8 +17,9 @@ async function init() {
 async function fetchCities() {
   // TODO: MODULE_CITIES
   // 1. Fetch cities using the Backend API and return the data
+  let url = `${config.backendEndpoint}/cities`;
   try {
-    let response = await fetch(config.backendEndpoint);
+    let response = await fetch(url);
     if (!response.ok) {
       throw new Error("Server is down");
     }

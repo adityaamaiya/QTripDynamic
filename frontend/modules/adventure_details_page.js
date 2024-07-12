@@ -14,9 +14,9 @@ function getAdventureIdFromURL(search) {
 async function fetchAdventureDetails(adventureId) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Fetch the details of the adventure by making an API call
-  config.backendEndpoint = `${config.backendEndpoint}adventures/detail?adventure=${adventureId}`;
+  let url = `${config.backendEndpoint}/adventures/detail?adventure=${adventureId}`;
   try {
-    let response = await fetch(config.backendEndpoint);
+    let response = await fetch(url);
     if (!response.ok) {
       throw new Error("Server is down");
     }
@@ -63,13 +63,13 @@ function addAdventureDetailsToDOM(adventure) {
 function addBootstrapPhotoGallery(images) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the bootstrap carousel to show the Adventure images
-  
+
   let photoGallery = document.getElementById("photo-gallery");
-  photoGallery.innerHTML="";
+  photoGallery.innerHTML = "";
   let carousel = document.createElement("div");
   carousel.className = "carousel slide";
   carousel.setAttribute("data-bs-ride", "carousel");
-  carousel.id="carouselExampleIndicators";
+  carousel.id = "carouselExampleIndicators";
 
   let carouselIndicators = document.createElement("div");
   carouselIndicators.className = "carousel-indicators";
@@ -86,11 +86,11 @@ function addBootstrapPhotoGallery(images) {
   photoGallery.append(carousel);
 
 
-  images.forEach((image,index) => {
+  images.forEach((image, index) => {
     let img = document.createElement("img");
     let carouselItem = document.createElement("div");
-    carouselItem.className="carousel-item ";
-    if(index==0){
+    carouselItem.className = "carousel-item ";
+    if (index == 0) {
       carouselItem.classList.add("active");
     }
     img.src = image;
@@ -99,41 +99,42 @@ function addBootstrapPhotoGallery(images) {
     carouselInner.append(carouselItem);
   })
 
-  let carouselControlPrev =document.createElement("button");
-  carouselControlPrev.className="carousel-control-prev";
+  let carouselControlPrev = document.createElement("button");
+  carouselControlPrev.className = "carousel-control-prev";
   carouselControlPrev.type = "button";
   carouselControlPrev.setAttribute("data-bs-target", "#carouselExampleIndicators");
   carouselControlPrev.setAttribute("data-bs-slide", "prev");
-  carouselControlPrev.innerHTML=`<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  carouselControlPrev.innerHTML = `<span class="carousel-control-prev-icon" aria-hidden="true"></span>
   <span class="visually-hidden">Previous</span>`;
-  let carouselControlNext =document.createElement("button");
-  carouselControlNext.className="carousel-control-next";
+  let carouselControlNext = document.createElement("button");
+  carouselControlNext.className = "carousel-control-next";
   carouselControlNext.type = "button";
   carouselControlNext.setAttribute("data-bs-target", "#carouselExampleIndicators");
   carouselControlNext.setAttribute("data-bs-slide", "next");
-  carouselControlNext.innerHTML=`<span class="carousel-control-next-icon" aria-hidden="true"></span>
+  carouselControlNext.innerHTML = `<span class="carousel-control-next-icon" aria-hidden="true"></span>
   <span class="visually-hidden">Next</span>`;
   carousel.append(carouselControlPrev);
   carousel.append(carouselControlNext);
- 
+
 
 }
 
 //Implementation of conditional rendering of DOM based on availability
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
-  let soldOut= document.getElementById("reservation-panel-sold-out");
-  let reservation=document.getElementById("reservation-panel-available");
-  let cost =document.getElementById("reservation-person-cost");
-  cost.textContent=`${adventure.costPerHead}`;
-  
-  if(adventure.available){
-    
-    soldOut.className="hide";
+  let soldOut = document.getElementById("reservation-panel-sold-out");
+  let reservation = document.getElementById("reservation-panel-available");
+  let cost = document.getElementById("reservation-person-cost");
+  cost.textContent = `${adventure.costPerHead}`;
+
+  if (adventure.available) {
+
+    soldOut.style.display = "none";
+    reservation.style.display = "block";
   }
-  else{
-    soldOut.classList.remove="hide";
-    reservation.className="hide";
+  else {
+    soldOut.style.display = "block";
+    reservation.style.display = "none";
   }
   // 1. If the adventure is already reserved, display the sold-out message.
 
@@ -144,7 +145,7 @@ function calculateReservationCostAndUpdateDOM(adventure, persons) {
   // TODO: MODULE_RESERVATIONS
   // 1. Calculate the cost based on number of persons and update the reservation-cost field
   let reservationCost = document.getElementById("reservation-cost");
-  reservationCost.textContent=`${adventure.costPerHead*persons}`;
+  reservationCost.textContent = `${adventure.costPerHead * persons}`;
 
 }
 
@@ -152,13 +153,59 @@ function calculateReservationCostAndUpdateDOM(adventure, persons) {
 function captureFormSubmit(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. Capture the query details and make a POST API call using fetch() to make the reservation
+  let url = `${config.backendEndpoint}/reservations/new`;
+
+
+  const form = document.getElementById("myForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    var data = {
+      name: form.elements["name"].value,
+      date: form.elements["date"].value,
+      person: form.elements["person"].value,
+      adventure: adventure.id,
+    }
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .then((json) => {
+        console.log(json);
+        // 2. If the reservation is successful, show an alert with "Success!" and refresh the page.
+        alert("Success!");
+        location.reload(); // Refresh the page
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        // If the reservation fails, just show an alert with "Failed!".
+        alert("Failed!");
+      });
+  })
+
   // 2. If the reservation is successful, show an alert with "Success!" and refresh the page. If the reservation fails, just show an alert with "Failed!".
 }
 
 //Implementation of success banner after reservation
 function showBannerIfAlreadyReserved(adventure) {
   // TODO: MODULE_RESERVATIONS
-  // 1. If user has already reserved this adventure, show the reserved-banner, else don't
+  let banner = document.getElementById("reserved-banner");
+  // If user has already reserved this adventure, show the reserved-banner, else don't
+  if (adventure.reserved) {
+    banner.style.display = "block";
+  } else {
+    banner.style.display = "none";
+  }
 
 }
 
