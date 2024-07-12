@@ -136,6 +136,7 @@ footer {
   padding-right: 15px;
   width: 100%;
   margin: 0;
+  
 }
 .activity-card-text:first-of-type{
   padding-top: 5px;
@@ -148,7 +149,7 @@ footer {
   height: 100%;
   
 
-  border-radius: 8px;
+  /* border-radius: 8px; */
   -webkit-transition: 0.2s all;
   -webkit-filter: brightness(70%);
 }
