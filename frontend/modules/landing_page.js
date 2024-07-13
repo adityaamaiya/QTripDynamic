@@ -26,7 +26,7 @@ async function fetchCities() {
     console.log(cities);
     return cities;
   } catch (error) {
-    console.error("Error: ", error.message);
+    // console.error("Error: ", error.message);
     return null;
   }
 }
