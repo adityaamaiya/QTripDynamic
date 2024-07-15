@@ -12,7 +12,7 @@ function getCityFromURL(search) {
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
-  let url = `${config.backendEndpoint}adventures?city=${city}`;
+  let url = `${config.backendEndpoint}/adventures?city=${city}`;
   try {
     let response = await fetch(url);
     if (!response.ok) {
