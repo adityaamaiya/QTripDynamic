@@ -4,7 +4,7 @@ import config from "../conf/index.js";
 async function fetchReservations() {
   // TODO: MODULE_RESERVATIONS
   // 1. Fetch Reservations by invoking the REST API and return them
-  let url = `${config.backendEndpoint}/reservations`;
+  let url = `${config.backendEndpoint}reservations`;
   
   try{
     let response = await fetch(url);

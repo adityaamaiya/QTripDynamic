@@ -14,7 +14,7 @@ function getAdventureIdFromURL(search) {
 async function fetchAdventureDetails(adventureId) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Fetch the details of the adventure by making an API call
-  let url = `${config.backendEndpoint}/adventures/detail?adventure=${adventureId}`;
+  let url = `${config.backendEndpoint}adventures/detail?adventure=${adventureId}`;
   try {
     let response = await fetch(url);
     if (!response.ok) {
@@ -153,7 +153,7 @@ function calculateReservationCostAndUpdateDOM(adventure, persons) {
 function captureFormSubmit(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. Capture the query details and make a POST API call using fetch() to make the reservation
-  let url = `${config.backendEndpoint}/reservations/new`;
+  let url = `${config.backendEndpoint}reservations/new`;
 
 
   const form = document.getElementById("myForm");
