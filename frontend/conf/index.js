@@ -1,3 +1,3 @@
-const config = { backendEndpoint: "https://qtrip-dynamic-smax.onrender.com" };
+const config = { backendEndpoint: "https://qtrip-ry15.onrender.com" };
 
 export default config;
